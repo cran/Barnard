@@ -1,10 +1,10 @@
 `barnardw.test` <-
-function(a,b,c,d,one.sided=FALSE,dp=0.001) {
+function(n1,n2,n3,n4,one.sided=FALSE,dp=0.001) {
   ret=.C("BarnardW",
-    as.integer(a),
-    as.integer(b),
-    as.integer(c),
-    as.integer(d),
+    as.integer(n1),
+    as.integer(n2),
+    as.integer(n3),
+    as.integer(n4),
     one.sided = as.integer(one.sided),
     dp = as.numeric(dp),
     nuisance.vector.x = as.double(vector("double",1.0+1.0/dp)),

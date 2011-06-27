@@ -6,10 +6,10 @@ Barnard's unconditional test for superiority applied to 2x2 contingency tables
 using Wald statistics for the difference between two binomial proportions.
 }
 \usage{
-barnardw.test(a, b, c, d, one.sided = FALSE, dp = 0.001)
+barnardw.test(n1, n2, n3, n4, one.sided = FALSE, dp = 0.001)
 }
 \arguments{
-  \item{a,b,c,d}{ Elements of the 2x2 contingency table }
+  \item{n1,n2,n3,n4}{ Elements of the 2x2 contingency table }
   \item{one.sided}{ Perform a one-sided or a two-sided test }
   \item{dp}{ The resolution to search for the nuisance parameter }
 }

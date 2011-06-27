@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include "R.h"
+#include "Rmath.h"
 
+// Note: Follows statXact as a convention to exclude observation along the boundary of the Wald statistic
 void BarnardW(int *a, int *b, int *c, int *d, int *one_sided, double *dp, double *nuisance_vector_x, double *nuisance_vector_y, double *wald_statistic) {
   int i,j;
   int c1  = (*a)+(*c);
@@ -12,7 +12,7 @@ void BarnardW(int *a, int *b, int *c, int *d, int *one_sided, double *dp, double
   (*wald_statistic) = (pxo<=0 || pxo>=1) ? 0 : (((double)((*b))/(double)(c2))-((double)((*a))/(double)(c1))) / sqrt(pxo*(1.0-pxo)*(irat));
 
   double ps  = 1.0+1.0/(*dp);
-  double *IJ = (double*)calloc(2.0*(c1+1)*(c2+1),sizeof(double));
+  double *IJ = (double*)Calloc(2.0*(c1+1)*(c2+1),double);
 
   double txo = (*one_sided) ? (*wald_statistic) : fabs(*wald_statistic);
   double tx;
@@ -23,20 +23,20 @@ void BarnardW(int *a, int *b, int *c, int *d, int *one_sided, double *dp, double
       for (i=0; i<=c1; i++) for (j=0; j<=c2; j++) {
 	  px = (double)(i+j)/(double)(n);
 	  tx = (px<=0 || px>=1) ? 0 : (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt(px*(1.0-px)*(irat));
-	  if (tx<=txo) {IJ[ccc++] = i; IJ[ccc++] = j;}
+	  if (tx<txo || (i==(*a) && j==(*b))) {IJ[ccc++] = i; IJ[ccc++] = j;}
 	}
     } else {
       for (i=0; i<=c1; i++) for (j=0; j<=c2; j++) {
 	  px = (double)(i+j)/(double)(n);
 	  tx = (px<=0 || px>=1) ? 0 : (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt(px*(1.0-px)*(irat));
-	  if (tx>=txo) {IJ[ccc++] = i; IJ[ccc++] = j;}
+	  if (tx>txo || (i==(*a) && j==(*b))) {IJ[ccc++] = i; IJ[ccc++] = j;}
 	}
     }
   } else {
     for (i=0; i<=c1; i++) for (j=0; j<=c2; j++) {
 	px = (double)(i+j)/(double)(n);
 	tx = (px<=0 || px>=1) ? 0 : (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt(px*(1.0-px)*(irat));
-	if (fabs(tx)>=txo) {IJ[ccc++] = i; IJ[ccc++] = j;}
+	if (fabs(tx)>txo || (i==(*a) && j==(*b)) || (c1==c2 && i==(*b) && j==(*a))) {IJ[ccc++] = i; IJ[ccc++] = j;}
       }
   }
 
@@ -56,6 +56,6 @@ void BarnardW(int *a, int *b, int *c, int *d, int *one_sided, double *dp, double
     }
   }
 
-  free(IJ);
+  Free(IJ);
 }
 
