@@ -1,0 +1,29 @@
+\name{Barnard}
+\alias{Barnard}
+\docType{package}
+
+\title{
+Barnard's Unconditional Test
+}
+
+\description{
+This package implements the \code{barnardw.test} function for performing Barnard's unconditional test of superiority.
+This is a more powerful alternative of Fisher's exact test for 2x2 contingency tables. The function uses Wald
+statistics as a measure of difference between two binomial proportions.
+}
+
+\author{
+Kamil Erguler, Post-Doctoral Research Associate, Molecular Medicine Research Center, University of Cyprus \email{erguler.kamil@ucy.ac.cy}
+}
+
+\references{
+\enumerate{
+\item Barnard, G.A. (1945) A new test for 2x2 tables. \emph{Nature}, 156:177.
+\item Barnard, G.A. (1947) Significance tests for 2x2 tables. \emph{Biometrika}, 34:123-138.
+}
+}
+
+\keyword{nonparametric}
+\keyword{htest}
+
+
