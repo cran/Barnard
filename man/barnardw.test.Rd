@@ -6,16 +6,15 @@ Barnard's unconditional test for superiority applied to 2x2 contingency tables
 using Wald statistics for the difference between two binomial proportions.
 }
 \usage{
-barnardw.test(n1, n2, n3, n4, one.sided = FALSE, dp = 0.001)
+barnardw.test(n1, n2, n3, n4, dp = 0.001)
 }
 \arguments{
   \item{n1,n2,n3,n4}{ Elements of the 2x2 contingency table }
-  \item{one.sided}{ Perform a one-sided or a two-sided test }
   \item{dp}{ The resolution to search for the nuisance parameter }
 }
 
 \value{
-  \item{nuisance.matrix }{Nuisance parameters and the p-values corresponding to each}
+  \item{nuisance.matrix }{Nuisance parameters and the corresponding p-values for both one- and two-sided tests}
   \item{dp }{The resolution of the search space for the nuisance parameter}
   \item{contingency.matrix }{The observed 2x2 contingency table}
   \item{alternative }{One Sided or Two Sided}
@@ -45,13 +44,13 @@ Barnard's test considers all tables with category sizes \eqn{a+c} and \eqn{b+d} 
 \author{ 
 Kamil Erguler, Post-Doctoral Research Associate, Molecular Medicine Research Center, University of Cyprus \email{erguler.kamil@ucy.ac.cy}
 }
-\note{ This code has largely been influenced by the works of Trujillo-Ortiz etal. (2004), Cardillo G. (2009), and Galili T. (2010). }
+\note{ I am indebted to Peter Calhoun for helping to test the performance and the accuracy of the code. I have largely been influenced by the works of Trujillo-Ortiz etal. (2004), Cardillo G. (2009), and Galili T. (2010). }
 
 \examples{
 barnardw.test(8,14,1,3)
 
-bt<-barnardw.test(8,14,1,3,one.sided=TRUE)
-plot(bt$nuisance.matrix,t="l",xlab="nuisance parameter",ylab="p-value")
+bt<-barnardw.test(8,14,1,3)
+plot(bt$nuisance.matrix[,1:2],t="l",xlab="nuisance parameter",ylab="p-value")
 }
 
 \keyword{nonparametric}
