@@ -6,14 +6,16 @@ Barnard's unconditional test for superiority applied to 2x2 contingency tables
 using Wald statistics for the difference between two binomial proportions.
 }
 \usage{
-barnardw.test(n1, n2, n3, n4, dp = 0.001)
+barnardw.test(n1, n2, n3, n4, dp = 0.001, verbose = FALSE)
 }
 \arguments{
   \item{n1,n2,n3,n4}{ Elements of the 2x2 contingency table }
   \item{dp}{ The resolution to search for the nuisance parameter }
+  \item{verbose}{ Extended output with 'wald.statistic.table' and 'nuisance.matrix' }
 }
 
 \value{
+  \item{wald.statistic.table }{The contingency tables considered in the analysis represented by 'n1' and 'n2', their Wald statistics, and whether they are included in the one-sided (1), two-sided (2) tests, or not included at all (0)}
   \item{nuisance.matrix }{Nuisance parameters and the corresponding p-values for both one- and two-sided tests}
   \item{dp }{The resolution of the search space for the nuisance parameter}
   \item{contingency.matrix }{The observed 2x2 contingency table}
@@ -44,13 +46,16 @@ Barnard's test considers all tables with category sizes \eqn{a+c} and \eqn{b+d} 
 \author{ 
 Kamil Erguler, Post-Doctoral Research Associate, Molecular Medicine Research Center, University of Cyprus \email{erguler.kamil@ucy.ac.cy}
 }
-\note{ I am indebted to Peter Calhoun for helping to test the performance and the accuracy of the code. I have largely been influenced by the works of Trujillo-Ortiz etal. (2004), Cardillo G. (2009), and Galili T. (2010). }
+\note{ I am indebted to Peter Calhoun for helping to test the performance and the accuracy of the code. The accuracy has been tested with respect to the existing MATLAB and R implementations as well as the results of StatXact. I have largely been influenced by the works of Trujillo-Ortiz etal. (2004), Cardillo G. (2009), and Galili T. (2010). }
 
 \examples{
 barnardw.test(8,14,1,3)
 
-bt<-barnardw.test(8,14,1,3)
+bt<-barnardw.test(8,14,1,3,verbose=TRUE)
 plot(bt$nuisance.matrix[,1:2],t="l",xlab="nuisance parameter",ylab="p-value")
+
+bt<-barnardw.test(40,14,10,30,verbose=TRUE)$wald.statistic.table
+plot(bt[,1],bt[,2],col=hsv(bt[,4]/4,1,1),t="p",xlab="n1",ylab="n2")
 }
 
 \keyword{nonparametric}
