@@ -25,13 +25,13 @@ barnardw.test(n1, n2, n3, n4, dp = 0.001, verbose = FALSE)
   \item{p.value }{The p-value for the observed contingency table}
 }
 \details{
-For a 2x2 contingency table, such as \code{X=[a,b;c,d]}, the normalized difference in proportions between the two categories, given in each column, can be written as
-\deqn{T(X)=\frac{\frac{b}{b+d}-\frac{a}{a+c}}{\sqrt{\frac{(a+b)(c+d)}{(a+b+c+d)^2}(\frac{1}{a+c}+\frac{1}{b+d})}}}
+For a 2x2 contingency table, such as \code{X=[n_1,n_2;n_3,n_4]}, the normalized difference in proportions between the two categories, given in each column, can be written as
+\deqn{T(X)=\frac{\frac{n_2}{n_2+n_4}-\frac{n_1}{n_1+n_3}}{\sqrt{\frac{(n_1+n_2)(n_3+n_4)}{(n_1+n_2+n_3+n_4)^2}(\frac{1}{n_1+n_3}+\frac{1}{n_2+n_4})}}}
 This is referred to as the Wald statistic. The probability of observing \eqn{X} is
-\deqn{P(X)=\frac{(a+c)!(b+d)!}{a!b!c!d!}\pi^{a+b}(1-\pi)^{c+d}}
+\deqn{P(X)=\frac{(n_1+n_3)!(n_2+n_4)!}{n_1!n_2!n_3!n_4!}\pi^{n_1+n_2}(1-\pi)^{n_3+n_4}}
 where \eqn{\pi} is the unknown nuisance parameter.
 
-Barnard's test considers all tables with category sizes \eqn{a+c} and \eqn{b+d} for a given \eqn{\pi}. The p-value is the sum of probabilities of the tables having Wald statistics in the rejection region, e.g. having significantly large difference in proportions for a two-sided test. The p-value of the test is the maximum p-value calculated over all \eqn{\pi} between 0 and 1.
+Barnard's test considers all tables with category sizes \eqn{n_1+n_3} and \eqn{n_2+n_4} for a given \eqn{\pi}. The p-value is the sum of probabilities of the tables having Wald statistics in the rejection region, e.g. having significantly large difference in proportions for a two-sided test. The p-value of the test is the maximum p-value calculated over all \eqn{\pi} between 0 and 1.
 }
 \references{
 \enumerate{

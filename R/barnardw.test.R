@@ -48,7 +48,7 @@ function(n1,n2,n3,n4,dp=0.001,verbose=FALSE) {
     return(list(wald.statistic.table = wald.statistic.table,
                 nuisance.matrix = nuisance.matrix,
                 dp = dp,
-                contingency.matrix = matrix(c(n1,n2,n3,n4),ncol=2,byrow=TRUE),
+                contingency.matrix = matrix(c(n1,n2,n3,n4),ncol=2,byrow=TRUE,dimnames=list(c("test1","test2"),c("cat1","cat2"))),
                 alternative = c("One Sided","Two Sided"),
                 wald.statistic = ret1$wald.statistic,
                 nuisance.parameter = ret2$nuisance.vector.x[c(np0,np1)],

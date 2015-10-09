@@ -13,7 +13,7 @@ This is a more powerful alternative of Fisher's exact test for 2x2 contingency t
 
 \author{
 \enumerate{
-\item Kamil Erguler, Post-Doctoral Research Associate, Molecular Medicine Research Center, University of Cyprus \email{erguler.kamil@ucy.ac.cy}
+\item Kamil Erguler, Post-doctoral Fellow, EEWRC, The Cyprus Institute \email{k.erguler@cyi.ac.cy}
 }
 }
 

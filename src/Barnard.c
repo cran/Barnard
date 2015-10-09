@@ -12,7 +12,6 @@ void WaldS(int *a, int *b, int *c, int *d, double *dp, int *mat_size, double *wa
 
   double *IJ = wald_statistic_table;
 
-  double txo = *wald_statistic;
   double tx;
   double px;
   int ccc = 0;
