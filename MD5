@@ -1,8 +1,8 @@
-dcd216397fce8a41e3d75858bbad419b *DESCRIPTION
+8d5fefa0032b634976a8e303b21b6928 *DESCRIPTION
 798dca319d835c4b617555ede94f9466 *NAMESPACE
 de004a0c0de5e798082c668e111ec4b7 *R/barnard.test.R
 7c7d6079f473cdb4075bfb47cb47bcaf *R/barnardw.test.R
 ebbc30014b604018af68ba028f29f5ef *man/Barnard.Rd
 dc8e27e6bd7e66760e27df21ad362f3a *man/barnard.test.Rd
 8bc047b685ab7ef3a01f09462b1e1e42 *man/barnardw.test.Rd
-882ecf7cb574b3b8978eeef57344466c *src/Barnard.c
+4b6d079957faeceb5df3004316703b3b *src/Barnard.c
