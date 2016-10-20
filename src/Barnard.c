@@ -1,6 +1,8 @@
 #include "R.h"
 #include "Rmath.h"
 #include <limits.h>
+//
+#include <stdio.h>
 
 void ScoreS(int *a, int *b, int *c, int *d, double *dp, int *mat_size, double *statistic_table, double *statistic) {
   int i,j;
@@ -9,7 +11,8 @@ void ScoreS(int *a, int *b, int *c, int *d, double *dp, int *mat_size, double *s
   int n   = c1+c2;
   double irat = (1.0 / (double)(c1) + 1.0 / (double)(c2));
   double pxo = (double)((*a)+(*b)) / (double)(n);
-  (*statistic) = (pxo<=0 || pxo>=1) ? HUGE_VAL : (((double)((*b))/(double)(c2))-((double)((*a))/(double)(c1))) / sqrt(pxo*(1.0-pxo)*(irat));
+  // (*statistic) = (pxo<=0 || pxo>=1) ? HUGE_VAL : (((double)((*b))/(double)(c2))-((double)((*a))/(double)(c1))) / sqrt(pxo*(1.0-pxo)*(irat));
+  (*statistic) = (((double)((*b))/(double)(c2))-((double)((*a))/(double)(c1))) / sqrt(pxo*(1.0-pxo)*(irat));
 
   double *IJ = statistic_table;
 
@@ -18,8 +21,10 @@ void ScoreS(int *a, int *b, int *c, int *d, double *dp, int *mat_size, double *s
   int ccc = 0;
 
   for (i=0; i<=c1; i++) for (j=0; j<=c2; j++) {
+      if ((i==0 && j==0) || (i==c1 && j==c2)) continue;
       px = (double)(i+j)/(double)(n);
-      tx = (px<=0 || px>=1) ? 0 : (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt(px*(1.0-px)*(irat));
+      // tx = (px<=0 || px>=1) ? HUGE_VAL : (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt(px*(1.0-px)*(irat));
+      tx = (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt(px*(1.0-px)*(irat));
       IJ[ccc++] = i; IJ[ccc++] = j; IJ[ccc++] = tx; IJ[ccc] = 0;
       ccc++;
     }
@@ -33,7 +38,8 @@ void WaldS(int *a, int *b, int *c, int *d, double *dp, int *mat_size, double *st
   int c2  = (*b)+(*d);
   double px1o = (double)(*a) / (double)(c1);
   double px2o = (double)(*b) / (double)(c2);
-  (*statistic) = ((px1o<=0 || px1o>=1) && (px2o<=0 || px2o>=1)) ? HUGE_VAL : (((double)((*b))/(double)(c2))-((double)((*a))/(double)(c1))) / sqrt( px1o*(1.0-px1o)/(double)(c1) + px2o*(1.0-px2o)/(double)(c2) );
+  // (*statistic) = ((px1o<=0 || px1o>=1) && (px2o<=0 || px2o>=1)) ? HUGE_VAL : (((double)((*b))/(double)(c2))-((double)((*a))/(double)(c1))) / sqrt( px1o*(1.0-px1o)/(double)(c1) + px2o*(1.0-px2o)/(double)(c2) );
+  (*statistic) = (((double)((*b))/(double)(c2))-((double)((*a))/(double)(c1))) / sqrt( px1o*(1.0-px1o)/(double)(c1) + px2o*(1.0-px2o)/(double)(c2) );
 
   double *IJ = statistic_table;
 
@@ -43,9 +49,11 @@ void WaldS(int *a, int *b, int *c, int *d, double *dp, int *mat_size, double *st
   int ccc = 0;
 
   for (i=0; i<=c1; i++) for (j=0; j<=c2; j++) {
+      if ((i==0 && j==0) || (i==c1 && j==c2)) continue;
       px1 = (double)(i)/(double)(c1);
       px2 = (double)(j)/(double)(c2);
-      tx = ((px1<=0 || px1>=1) && (px2<=0 || px2>=1)) ? 0 : (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt( px1*(1.0-px1)/(double)(c1) + px2*(1.0-px2)/(double)(c2) );
+      // tx = ((px1<=0 || px1>=1) && (px2<=0 || px2>=1)) ? HUGE_VAL : (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt( px1*(1.0-px1)/(double)(c1) + px2*(1.0-px2)/(double)(c2) );
+      tx = (((double)j/(double)c2)-((double)i/(double)c1)) / sqrt( px1*(1.0-px1)/(double)(c1) + px2*(1.0-px2)/(double)(c2) );
       IJ[ccc++] = i; IJ[ccc++] = j; IJ[ccc++] = tx; IJ[ccc] = 0;
       ccc++;
     }
@@ -78,7 +86,10 @@ void Barnard(int *a, int *b, int *c, int *d, double *dp, int *mat_size, double *
       i = IJ[ii];
       j = IJ[ii+1];
       ad = exp(n1+n2+(double)(i+j)*log(p)+(double)(n-i-j)*log(1.0-p)-(lgamma(i+1)+lgamma(j+1)+lgamma(c1-i+1)+lgamma(c2-j+1)));
-       if (IJ[ii+3]==1) nuisance_vector_y0[k] += ad;
+      //
+      // printf("exp(%g+%g+(%d+%d)*log(%g)+(%d-%d-%d)*log(1-%g)-(lgamma(%d+1)+lgamma(%d+1)+lgamma(%d-%d+1)+lgamma(%d-%d+1)))=%g\n",n1,n2,i,j,p,n,i,j,p,i,j,c1,i,c2,j,ad);
+      //
+      if (IJ[ii+3]==1) nuisance_vector_y0[k] += ad;
       nuisance_vector_y1[k] += ad;
     }
   }
